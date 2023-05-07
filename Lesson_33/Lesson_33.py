@@ -5,7 +5,7 @@ index = dict(index = 0)
 othindex = dict(index = 0)
 def atm_balance():
     atm_list = []
-    with open("semester_1\Lesson_33\data_atm.csv", "r")as csv_file:
+    with open("Lesson_33\data_atm.csv", "r")as csv_file:
         read = csv.reader(csv_file)
         for x in read:
             atm_list.append(x)
@@ -17,14 +17,14 @@ atm_csv = ["0000", big_balance,"86000000", 0, 0, 0, 0]
 # for x in menu(3):
 #     print(x)
 def show_atm():
-    with open("semester_1\Lesson_33\data_atm.csv", "a", newline='')as csv_file:
+    with open("Lesson_33\data_atm.csv", "a", newline='')as csv_file:
         read = csv.writer(csv_file)
         read.writerow(atm_csv)
         csv_file.close()
 def check_log(a):
     chl = 0
     counter = 0
-    with open("semester_1\Lesson_33\log_data.csv", "r") as csv_file:
+    with open("Lesson_33\log_data.csv", "r") as csv_file:
         reader = csv.reader(csv_file)
         for x in reader:
             if x[0] == a:
@@ -40,7 +40,7 @@ def check_log(a):
         return chl
 def check_psw(a):
     chl = 0
-    with open("semester_1\Lesson_33\log_data.csv", "r") as csv_file:
+    with open("Lesson_33\log_data.csv", "r") as csv_file:
         reader = csv.reader(csv_file)
         for x in reader:
             if x[1] == a:
@@ -53,7 +53,7 @@ def check_psw(a):
         return chl
 def restorepasw(a):
     aplist = []
-    with open("semester_1\Lesson_33\log_data.csv", "r") as csv_file:
+    with open("Lesson_33\log_data.csv", "r") as csv_file:
         reader = csv.reader(csv_file)
         for x in reader:
             aplist.append(x)
@@ -102,12 +102,12 @@ def register(pasw, quest, ans, name):
         if check_log(card_num) == False:
             break
     aplist = [card_num,pasw,quest,ans]
-    with open("semester_1\Lesson_33\log_data.csv", "a", newline='') as csv_file:
+    with open("Lesson_33\log_data.csv", "a", newline='') as csv_file:
         write = csv.writer(csv_file)
         write.writerow(aplist)
         csv_file.close()
     aplist2 = [card_num, name, "0", "0", "0"]
-    with open("semester_1\Lesson_33\data_store.csv", "a", newline='') as csv_file:
+    with open("Lesson_33\data_store.csv", "a", newline='') as csv_file:
         write = csv.writer(csv_file)
         write.writerow(aplist2)
         csv_file.close()
@@ -166,7 +166,7 @@ def bills(money, chl, card_no):
     counter2 = 1
     while True:
         if money == 0:
-            with open("semester_1\Lesson_33\dollars.csv", "a", newline='') as csv_file:
+            with open("Lesson_33\dollars.csv", "a", newline='') as csv_file:
                 write = csv.writer(csv_file)
                 write.writerow(dollars)
                 csv_file.close()
@@ -185,12 +185,18 @@ def show_info(k):
             newlist.append(x)
         csv_file.close()
         return newlist
-def aki(a, k, data_list):
+def sum(a, k, data_list):
     sum = 0
     for x in data_list:
         if x[a] == k:
             continue
         sum = sum + float(x[a])
+def aki(a, k, data_list):
+    sum = 0
+    for x in data_list:
+        if x[a] == k:
+            continue
+        sum = sum + int(x[a])
     return sum
 ident = input("User/Admin: ")
 if ident == "user":
@@ -214,7 +220,7 @@ if ident == "user":
                     chpasw = check_psw(pasw)
                     if chpasw == True:
                         data_list = []
-                        with open("semester_1\Lesson_33\data_store.csv", "r") as csv_file:
+                        with open("Lesson_33\data_store.csv", "r") as csv_file:
                             reader = csv.reader(csv_file)
                             for x in reader:
                                 data_list.append(x)
@@ -292,7 +298,7 @@ if ident == "user":
                                     data_list[counters[0]][4] = balance
                                     data_list[counters[1]][4] = othbalance
                                 csv_file.close()
-                                with open("semester_1\Lesson_33\data_store.csv", "w", newline='')as csv_file:
+                                with open("Lesson_33\data_store.csv", "w", newline='')as csv_file:
                                     write = csv.writer(csv_file)
                                     write.writerows(data_list)
                                 show_atm()
@@ -321,36 +327,37 @@ if ident == "user":
             if check_log(login) == True:
                 newlist = restorepasw(login)
             print(newlist)
-            with open("semester_1\Lesson_33\log_data.csv", "w", newline='')as csv_file:
+            with open("Lesson_33\log_data.csv", "w", newline='')as csv_file:
                 writer = csv.writer(csv_file)
                 writer.writerows(newlist)
         elif menu == 4:
             break
 elif ident == "admin":
     print("Welcome admin")
-    print("Press 1 to show data")
-    print("Press 2 to show bills")
-    menu = int(input(""))
-    data_list = show_info("semester_1\Lesson_33\data_atm.csv")
-    if menu == 1:
-        print("Balance of ATM:", data_list[len(data_list)-1][1])
-        print("NO of customers:", len(data_list)-2)
-        print("Withdrawn money:", aki(3, "withdrawal_money", data_list))
-        print("Deposit money:", aki(4, "deposit_money", data_list))
-        print("Service_charge:", aki(6, "service_charge", data_list))
-    elif menu == 2:
-        dollars = show_info("semester_1\Lesson_33\dollars.csv")
-        curr = []
-        counter = 0
-        for x in dollars:
-            if x[0] == "card_no":
-                continue
-            for z in x[1:]:
-                z = int(z)
-                curr.append(z)
-        print(curr)
-        if curr[5] == 0 and curr[6] > 0:
-            print(f"WITHDRAWN:\n\t100$: ")
-        else:
-            print("REMAINING: hello hello done")
+    while True:
+        print("Press 1 to show data")
+        print("Press 2 to show bills")
+        print("Press 3 to quit")
+        menu = int(input(""))
+        data_list = show_info("Lesson_33\data_atm.csv")
+        if menu == 1:
+            print("Balance of ATM:", data_list[len(data_list)-1][1])
+            print("NO of customers:", len(data_list)-2)
+            print("Withdrawn money:", sum(3, "withdrawal_money", data_list))
+            print("Deposit money:", sum(4, "deposit_money", data_list))
+            print("Service_charge:", sum(6, "service_charge", data_list))
+        elif menu == 2:
+            dollars = show_info("Lesson_33\dollars.csv")
+            deposits = []
+            withs = []
+            counter = 0 
+            for x in dollars:
+                if x[0] == "card_no":
+                    continue
+                if int(x[6]) == 0 and int(x[7]) > 0:
+                    deposits.append(x)
+                else:
+                    withs.append(x)
+            print(f"Deposits:\n\t100$: {aki(1, 'card_no', deposits)}\n\t50$: {aki(2, 'card_no', deposits)}\n\t20$: {aki(3, 'card_no', deposits)}\n\t5$: {aki(4, 'card_no', deposits)}\n\t1$: {aki(5, 'card_no', deposits)}")
+            print(f"Withdrawals:\n\t100$: {aki(1, 'card_no', withs)}\n\t50$: {aki(2, 'card_no', withs)}\n\t20$: {aki(3, 'card_no', withs)}\n\t5$: {aki(4, 'card_no', withs)}\n\t1$: {aki(5, 'card_no', withs)}")
     
