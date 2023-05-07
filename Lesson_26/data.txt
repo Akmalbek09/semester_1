@@ -1,0 +1,4 @@
+No 18
+Name Akmalbek
+Age 13
+Password Pakimon1

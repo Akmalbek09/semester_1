@@ -1,0 +1,5 @@
+id,playersname,winner,score,amountplayed,enter,exit,interval
+ai1,hbnjn,AI,300,5,34:51,34:52,0:1
+ai2,hbnjn,AI,300,45,34:51,34:52,0:1
+ai4,hbnjn,AI,300,2,34:51,34:52,0:1
+ai3,hbnjn,AI,300,23,34:51,34:52,0:1
