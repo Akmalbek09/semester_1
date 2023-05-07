@@ -352,5 +352,5 @@ elif ident == "admin":
         if curr[5] == 0 and curr[6] > 0:
             print(f"WITHDRAWN:\n\t100$: ")
         else:
-            print("REMAINING: hello")
+            print("REMAINING: hello hello again")
     
