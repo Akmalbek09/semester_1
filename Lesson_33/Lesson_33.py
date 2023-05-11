@@ -397,12 +397,10 @@ elif ident == "admin":
             print(f"Deposits:\n\t100$: {aki(1, 'card_no', deposits)}\n\t50$: {aki(2, 'card_no', deposits)}\n\t20$: {aki(3, 'card_no', deposits)}\n\t5$: {aki(4, 'card_no', deposits)}\n\t1$: {aki(5, 'card_no', deposits)}")
             print(f"Withdrawals:\n\t100$: {aki(1, 'card_no', withs)}\n\t50$: {aki(2, 'card_no', withs)}\n\t20$: {aki(3, 'card_no', withs)}\n\t5$: {aki(4, 'card_no', withs)}\n\t1$: {aki(5, 'card_no', withs)}")
         elif menu == 3:
-<<<<<<< HEAD
             h = int(input("Press 1 to deposit 100$\nPress 2 to deposit 50$\nPress 3 to deposit 20$\nPress 4 to deposit 5$\nPress 5 to deposit 1$\n"))
             if h == 1:
                 money = int("Amount: ")
         elif menu == 4:
-=======
             h = int(input("Enter type of cash(100$/50$/20$/5$/1$): "))
             newlist = show_info("Lesson_33\data_atm.csv")
             z = int(input("Amount: "))
@@ -415,5 +413,4 @@ elif ident == "admin":
             check_log(cardn)
             newlist = show_info("")
         elif menu == 5:
->>>>>>> Working-branch
             break
