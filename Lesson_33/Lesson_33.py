@@ -9,7 +9,7 @@ def atm_balance():
         read = csv.reader(csv_file)
         for x in read:
             atm_list.append(x)
-        big_balance = float(atm_list[len(atm_list)-1][1])
+        big_balance = float(atm_list[len(atm_list)-1][4])
         return big_balance
 big_balance = atm_balance()
 atm_csv = ["0000", big_balance,"86000000", 0, 0, 0, 0]
@@ -111,7 +111,8 @@ def register(pasw, quest, ans, name):
         write = csv.writer(csv_file)
         write.writerow(aplist)
         csv_file.close()
-    aplist2 = [card_num, name, "0", "0", "0"]
+    new_balance = float(input("Enter new balance: "))
+    aplist2 = [card_num, name, "0", "0", new_balance]
     with open("Lesson_33\data_store.csv", "a", newline='') as csv_file:
         write = csv.writer(csv_file)
         write.writerow(aplist2)
@@ -395,6 +396,11 @@ elif ident == "admin":
         elif menu == 4:
             cardn = input("Enter card_number for removal: ")
             check_log(cardn)
-            newlist = show_info("")
+            newlist = show_info("Lesson_33\log_data.csv")
+            newlist2 = show_info("Lesson_33\data_store.csv")
+            del newlist[index["index"]]
+            del newlist2[othindex["index"]]
+            write("Lesson_33\log_data.csv", newlist)
+            write("Lesson_33\data_store.csv", newlist2)
         elif menu == 5:
             break
