@@ -397,5 +397,4 @@ elif ident == "admin":
             check_log(cardn)
             newlist = show_info("")
         elif menu == 5:
-            dfghj
             break
