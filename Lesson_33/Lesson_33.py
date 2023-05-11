@@ -16,6 +16,11 @@ atm_csv = ["0000", big_balance,"86000000", 0, 0, 0, 0]
 # from Funct import *
 # for x in menu(3):
 #     print(x)
+def write(z,b):
+    with open(z,"w",newline='') as csv_file:
+        w = csv.writer(csv_file)
+        w.writerows(b)
+        csv_file.close()
 def show_atm():
     with open("Lesson_33\data_atm.csv", "a", newline='')as csv_file:
         read = csv.writer(csv_file)
@@ -124,7 +129,7 @@ def transfer(tax, card, balance, othbalance, card_no):
                 othbalance = othbalance + money - service_charge
                 atm_csv[6] = atm_csv[6] + service_charge
                 atm_csv[5] = money - service_charge
-                atm_csv[1] = big_balance - money - service_charge
+                atm_csv[1] = atm_csv[1] - money + service_charge
                 balances.append(balance)
                 balances.append(othbalance)
                 print(f"Successfully transferred, your balance: {balance}")
@@ -155,28 +160,6 @@ def payment(bonus, balance):
     bonus = money * bonus
     balances = balance - money + bonus
     return balances
-def bills(money, chl, card_no):
-    dollars = [card_no,0,0,0,0,0,00,00]
-    divide1 = [100, 50, 20, 5, 1]
-    if chl == 1:
-        dollars[6] = money
-    elif chl == 0:
-        dollars[7] = money
-    counter = 0
-    counter2 = 1
-    while True:
-        if money == 0:
-            with open("Lesson_33\dollars.csv", "a", newline='') as csv_file:
-                write = csv.writer(csv_file)
-                write.writerow(dollars)
-                csv_file.close()
-                return dollars
-        else:
-            newmoney = str(money / divide1[counter])
-            dollars[counter2] = newmoney[0]
-            money = money % divide1[counter]
-            counter += 1
-            counter2 += 1
 def show_info(k):
     newlist = []
     with open(k, "r") as csv_file:
@@ -185,6 +168,46 @@ def show_info(k):
             newlist.append(x)
         csv_file.close()
         return newlist
+def m(c,alist,divide1,dollars,money):
+    counter = 0
+    counter4 = 0
+    counter3 = 2
+    counter2 = 2
+    while True:
+        if money == 0:
+            for x in alist:
+                if c == 1:
+                    alist[counter4] = int(x) - int(dollars[counter3])
+                elif c == 2:
+                    alist[counter4] = int(x) + int(dollars[counter3])
+                counter4 += 1
+                counter3 += 1
+            dollars[2:7] = alist
+            return dollars
+        else:
+            newmoney = str(money / divide1[counter])
+            dollars[counter2] = newmoney[0]
+            money = money % divide1[counter]
+            counter += 1
+            counter2 += 1
+def bills(balance, money, chl, card_no):
+    dollars = [card_no,0,0,0,0,0,0,00,00]
+    divide1 = [100, 50, 20, 5, 1]
+    newlist = show_info("Lesson_33\dollars.csv")
+    dlist = newlist[len(newlist)-1]
+    alist = dlist[2:7]
+    if chl == 1:
+        dollars[7] = money
+        dollars[1] = balance
+        aplist = m(1,alist,divide1,dollars,money)
+    elif chl == 0:
+        dollars[8] = money
+        dollars[1] = balance
+        aplist = m(2,alist,divide1,dollars,money)
+    with open("Lesson_33\dollars.csv","a",newline='') as csv_file:
+        write = csv.writer(csv_file)
+        write.writerow(aplist)
+        csv_file.close()
 def sum(a, k, data_list):
     sum = 0
     for x in data_list:
@@ -246,11 +269,10 @@ if ident == "user":
                             elif menu == 2:
                                 print(f"Balance: ${balance}")
                                 deposit = int(input("Enter deposit money: "))
-                                bills(deposit,0,login)
                                 balance = deposit + balance 
-                                big_balance = big_balance + deposit
                                 atm_csv[4] = atm_csv[4] + deposit
-                                atm_csv[1] = big_balance + deposit
+                                atm_csv[1] = atm_csv[1] + deposit
+                                bills(atm_csv[1],deposit,0,login)
                             elif menu == 3:
                                 ch = 1
                                 card = input("Enter card number(8 digits required): ")
@@ -282,11 +304,11 @@ if ident == "user":
                                     cash = int(input("Enter money for withdrawal: "))
                                     service_charge = cash * 0.05
                                     if cash + service_charge <= balance:
-                                        bills(cash, 1, login)
                                         balance = balance - cash - service_charge
                                         atm_csv[6] = atm_csv[6] + service_charge
                                         atm_csv[3] = cash - service_charge
-                                        atm_csv[1] = big_balance - cash - service_charge
+                                        atm_csv[1] = atm_csv[1] - cash + service_charge
+                                        bills(atm_csv[1],cash, 1, login)
                                         print(f"Successfully withdrawn, balance: ${balance}")
                                         break
                                     else:
@@ -337,7 +359,9 @@ elif ident == "admin":
     while True:
         print("Press 1 to show data")
         print("Press 2 to show bills")
-        print("Press 3 to quit")
+        print("Press 3 to add money")
+        print("Press 4 to delete user")
+        print("Press 5 to quit")
         menu = int(input(""))
         data_list = show_info("Lesson_33\data_atm.csv")
         if menu == 1:
@@ -361,4 +385,16 @@ elif ident == "admin":
             print(f"Deposits:\n\t100$: {aki(1, 'card_no', deposits)}\n\t50$: {aki(2, 'card_no', deposits)}\n\t20$: {aki(3, 'card_no', deposits)}\n\t5$: {aki(4, 'card_no', deposits)}\n\t1$: {aki(5, 'card_no', deposits)}")
             print(f"Withdrawals:\n\t100$: {aki(1, 'card_no', withs)}\n\t50$: {aki(2, 'card_no', withs)}\n\t20$: {aki(3, 'card_no', withs)}\n\t5$: {aki(4, 'card_no', withs)}\n\t1$: {aki(5, 'card_no', withs)}")
         elif menu == 3:
+            h = int(input("Enter type of cash(100$/50$/20$/5$/1$): "))
+            newlist = show_info("Lesson_33\data_atm.csv")
+            z = int(input("Amount: "))
+            money = z * h
+            newlist[len(newlist)-1][1] = float(newlist[len(newlist)-1][1]) + money
+            write("Lesson_33\data_atm.csv", newlist)
+            bills(newlist[len(newlist)-1][1], money, 0, 0000)
+        elif menu == 4:
+            cardn = input("Enter card_number for removal: ")
+            check_log(cardn)
+            newlist = show_info("")
+        elif menu == 5:
             break
