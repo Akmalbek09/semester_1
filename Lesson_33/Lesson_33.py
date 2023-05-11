@@ -183,10 +183,6 @@ def m(c,alist,divide1,dollars,money):
                 counter4 += 1
                 counter3 += 1
             dollars[2:7] = alist
-<<<<<<< HEAD
-            print(dollars)
-=======
->>>>>>> Working-branch
             return dollars
         else:
             newmoney = str(money / divide1[counter])
@@ -210,11 +206,7 @@ def bills(balance, money, chl, card_no):
         aplist = m(2,alist,divide1,dollars,money)
     with open("Lesson_33\dollars.csv","a",newline='') as csv_file:
         write = csv.writer(csv_file)
-<<<<<<< HEAD
-        write.writerow(dollars)
-=======
         write.writerow(aplist)
->>>>>>> Working-branch
         csv_file.close()
 def sum(a, k, data_list):
     sum = 0
@@ -368,12 +360,8 @@ elif ident == "admin":
         print("Press 1 to show data")
         print("Press 2 to show bills")
         print("Press 3 to add money")
-<<<<<<< HEAD
-        print("Press 4 to quit")
-=======
         print("Press 4 to delete user")
         print("Press 5 to quit")
->>>>>>> Working-branch
         menu = int(input(""))
         data_list = show_info("Lesson_33\data_atm.csv")
         if menu == 1:
