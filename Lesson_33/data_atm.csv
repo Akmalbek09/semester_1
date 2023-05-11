@@ -1,7 +1,2 @@
 date,ATM_balance,card_no,withdrawal_money,deposit_money,transfer_money,service_charge
-<<<<<<< HEAD
 0000,500000,00000000,00,00,00,00
-2023/05/11,500220.3,19876666,241.3,487,0,12.700000000000001
-=======
-0000,500300.0,00000000,00,00,00,00
->>>>>>> Working-branch
