@@ -16,6 +16,11 @@ atm_csv = ["0000", big_balance,"86000000", 0, 0, 0, 0]
 # from Funct import *
 # for x in menu(3):
 #     print(x)
+def write(z,b):
+    with open(z,"w",newline='') as csv_file:
+        w = csv.writer(csv_file)
+        w.writerows(b)
+        csv_file.close()
 def show_atm():
     with open("Lesson_33\data_atm.csv", "a", newline='')as csv_file:
         read = csv.writer(csv_file)
@@ -178,7 +183,10 @@ def m(c,alist,divide1,dollars,money):
                 counter4 += 1
                 counter3 += 1
             dollars[2:7] = alist
+<<<<<<< HEAD
             print(dollars)
+=======
+>>>>>>> Working-branch
             return dollars
         else:
             newmoney = str(money / divide1[counter])
@@ -202,7 +210,11 @@ def bills(balance, money, chl, card_no):
         aplist = m(2,alist,divide1,dollars,money)
     with open("Lesson_33\dollars.csv","a",newline='') as csv_file:
         write = csv.writer(csv_file)
+<<<<<<< HEAD
         write.writerow(dollars)
+=======
+        write.writerow(aplist)
+>>>>>>> Working-branch
         csv_file.close()
 def sum(a, k, data_list):
     sum = 0
@@ -356,7 +368,12 @@ elif ident == "admin":
         print("Press 1 to show data")
         print("Press 2 to show bills")
         print("Press 3 to add money")
+<<<<<<< HEAD
         print("Press 4 to quit")
+=======
+        print("Press 4 to delete user")
+        print("Press 5 to quit")
+>>>>>>> Working-branch
         menu = int(input(""))
         data_list = show_info("Lesson_33\data_atm.csv")
         if menu == 1:
@@ -380,8 +397,23 @@ elif ident == "admin":
             print(f"Deposits:\n\t100$: {aki(1, 'card_no', deposits)}\n\t50$: {aki(2, 'card_no', deposits)}\n\t20$: {aki(3, 'card_no', deposits)}\n\t5$: {aki(4, 'card_no', deposits)}\n\t1$: {aki(5, 'card_no', deposits)}")
             print(f"Withdrawals:\n\t100$: {aki(1, 'card_no', withs)}\n\t50$: {aki(2, 'card_no', withs)}\n\t20$: {aki(3, 'card_no', withs)}\n\t5$: {aki(4, 'card_no', withs)}\n\t1$: {aki(5, 'card_no', withs)}")
         elif menu == 3:
+<<<<<<< HEAD
             h = int(input("Press 1 to deposit 100$\nPress 2 to deposit 50$\nPress 3 to deposit 20$\nPress 4 to deposit 5$\nPress 5 to deposit 1$\n"))
             if h == 1:
                 money = int("Amount: ")
         elif menu == 4:
+=======
+            h = int(input("Enter type of cash(100$/50$/20$/5$/1$): "))
+            newlist = show_info("Lesson_33\data_atm.csv")
+            z = int(input("Amount: "))
+            money = z * h
+            newlist[len(newlist)-1][1] = float(newlist[len(newlist)-1][1]) + money
+            write("Lesson_33\data_atm.csv", newlist)
+            bills(newlist[len(newlist)-1][1], money, 0, 0000)
+        elif menu == 4:
+            cardn = input("Enter card_number for removal: ")
+            check_log(cardn)
+            newlist = show_info("")
+        elif menu == 5:
+>>>>>>> Working-branch
             break
