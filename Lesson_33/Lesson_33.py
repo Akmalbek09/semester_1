@@ -9,7 +9,7 @@ def atm_balance():
         read = csv.reader(csv_file)
         for x in read:
             atm_list.append(x)
-        big_balance = float(atm_list[len(atm_list)-1][4])
+        big_balance = float(atm_list[len(atm_list)-1][1])
         return big_balance
 big_balance = atm_balance()
 atm_csv = ["0000", big_balance,"86000000", 0, 0, 0, 0]
