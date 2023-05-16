@@ -1,4 +1,4 @@
-word = """aardvark
+word = """ aardvark
 # aardwolf
 # aaron
 # aback
@@ -58108,15 +58108,3 @@ word = """aardvark
 # zoos
 # zulu
 # trash"""
-def word_sorter(word):
-    my_list = []
-    word = list(word)
-    counter = 0
-    b = 0
-    for x in word:
-        if x == '#':
-            my_list.append(word[b:counter-1])
-            b = counter+2
-        counter +=1
-    return my_list
-print(word_sorter(word))
