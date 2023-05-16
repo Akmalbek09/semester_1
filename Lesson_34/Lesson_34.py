@@ -1,4 +1,5 @@
 from words import *
+words = word_sorter(word)
 def letters(txt,a):
     listletters = []
     for x in txt:
