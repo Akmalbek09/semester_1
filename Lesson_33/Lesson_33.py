@@ -188,8 +188,14 @@ def m(c,alist,divide1,dollars,money):
             return dollars
         else:
             newmoney = str(money / divide1[counter])
-            dollars[counter2] = newmoney[0]
-            money = money % divide1[counter]
+            counter98 = 0
+            for x in newmoney:
+                if x == ".":
+                    break
+                counter98 += 1
+            dollars[counter2] = newmoney[0:counter98]
+            money = int(money % divide1[counter])
+            print(money)
             counter += 1
             counter2 += 1
 def bills(balance, money, chl, card_no):
@@ -200,11 +206,11 @@ def bills(balance, money, chl, card_no):
     alist = dlist[2:7]
     if chl == 1:
         dollars[7] = money
-        dollars[1] = balance
+        dollars[1] = int(balance)
         aplist = m(1,alist,divide1,dollars,money)
     elif chl == 0:
         dollars[8] = money
-        dollars[1] = balance
+        dollars[1] = int(balance)
         aplist = m(2,alist,divide1,dollars,money)
     with open("Lesson_33\dollars.csv","a",newline='') as csv_file:
         write = csv.writer(csv_file)
@@ -275,6 +281,7 @@ if ident == "user":
                                 atm_csv[4] = atm_csv[4] + deposit
                                 atm_csv[1] = atm_csv[1] + deposit
                                 bills(atm_csv[1],deposit,0,login)
+                                print("Successfully deposited, your balance: $", balance)
                             elif menu == 3:
                                 ch = 1
                                 card = input("Enter card number(8 digits required): ")
