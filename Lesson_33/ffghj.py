@@ -18,7 +18,7 @@ import random
 # dollars = [8600,0,0,0,0,0,00,00]
 # divide1 = [100, 50, 20, 5, 1]
 # counter = 0
-# counter2 = 1
+# counter2 = 
 # while True:
 #     if money == 0:
 #         print(dollars)

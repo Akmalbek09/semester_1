@@ -45,12 +45,23 @@ def word_splitter(txt):
             b = counter
     wordd.append(txt[b:])
     return wordd
+def r(z):
+    for x in z:
+        z.replace()
+    return(z)
+badwords = ["fuck", "asshole", "motherfucker", "stupid","dumb", "dick", "pussy"]
 symbols = [",", ".", "_", "-", "+", "*", "/", "@", "#", "$", "%", "&", "="]
 letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 words = word_sorter(word)
 txt = input(":").lower()
-# txt = txt.strip()
+txt = txt.strip()
 txt = space_remover(txt)
 print(f"quantity of letter: {letters(txt,letter)}")
-print(txt)
-word_splitter(txt)
+wordsp = word_splitter(txt)
+c = 0
+c1 = 0
+for x in wordsp:
+    if x in badwords:
+        wordsp[c] = "xxxx"
+    c += 1
+print(wordsp)
